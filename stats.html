@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+</head>
+<body>
+    <h1>Attendance Statistics</h1>
+    <h2>Classroom Stats</h2>
+    <ul>
+        {% for classroom, count in classroom_stats %}
+        <li>{{ classroom }}: {{ count }} attendance(s)</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Date Stats</h2>
+    <ul>
+        {% for date, count in date_stats %}
+        <li>{{ date }}: {{ count }} attendance(s)</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

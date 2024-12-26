@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            
+        }
+        .login-container {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            border: 2px solid #2575fc;
+        }
+        .login-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2575fc;
+        }
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+        }
+        .login-container button {
+            padding: 10px 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .login-container .login-btn {
+            background: #2575fc;
+            color: #fff;
+        }
+        .login-container .login-btn:hover {
+            background: #1a5ed8;
+        }
+        .login-container .reset-btn {
+            background: #ff5f5f;
+            color: #fff;
+        }
+        .login-container .reset-btn:hover {
+            background: #e04c4c;
+        }
+        .login-container .icon {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <H3> Bihar Institute of Public Administration & Rural Development </H3>
+                
+        <img src="../Static/logo.png" width="110" height="100" style="display: block; margin: 0 auto;">
+        
+        <h1> Attendance System <br> Admin Login </h1>
+
+        <form method="POST">
+            <label>
+                    <input type="text" name="username" placeholder="Username" required>
+            </label>
+            <label>
+                    <input type="password" name="password" placeholder="Password" required>
+            </label>
+            <div style="display: flex; justify-content: space-between;">
+                <button type="reset" class="reset-btn">Reset</button>
+                <button type="submit" class="login-btn">Login</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

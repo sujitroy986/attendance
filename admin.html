@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <img src="../Static/logo.png" width="110" height="100" style="display: block; margin: 0 auto;">
+        <h1 class="text-center">Admin Dashboard</h1>
+        <a href="/download_report" class="btn btn-success">Download Report</a>
+
+        <form method="GET" action="/admin" class="form-inline">
+            <input type="text" name="search" placeholder="Search by Name or ID" value="{{ request.args.get('search', '') }}" class="form-control mr-2">
+            <label for="classroom">Filter by Classroom:</label>
+            <select name="classroom" id="classroom" class="form-control mr-2">
+                <option value="">All</option>
+                    <option value="Chanakya" {% if request.args.get('classroom') == 'Chanakya' %}selected{% endif %}>Chanakya</option>
+                    <option value="Chandragupta" {% if request.args.get('classroom') == 'Chandragupta' %}selected{% endif %}>Chandragupta</option>
+                    <option value="Ashoka" {% if request.args.get('classroom') == 'Ashoka' %}selected{% endif %}>Ashoka</option>
+                    <option value="Aryabhatta" {% if request.args.get('classroom') == 'Aryabhatta' %}selected{% endif %}>Aryabhatta</option>
+                    <option value="Gandhi" {% if request.args.get('classroom') == 'Gandhi' %}selected{% endif %}>Gandhi</option>
+                    <option value="APJ" {% if request.args.get('classroom') == 'APJ' %}selected{% endif %}>APJ</option>
+                    <option value="Ambedkar" {% if request.args.get('classroom') == 'Ambedkar' %}selected{% endif %}>Ambedkar</option>
+                    <option value="Tutorial Hall" {% if request.args.get('classroom') == 'Tutorial Hall' %}selected{% endif %}>Tutorial Hall</option>
+                    <option value="Kaimur" {% if request.args.get('classroom') == 'Kaimur' %}selected{% endif %}>Kaimur</option>
+                    <option value="Mandar" {% if request.args.get('classroom') == 'Mandar' %}selected{% endif %}>Mandar</option>
+                    <option value="Satpura" {% if request.args.get('classroom') == 'Satpura' %}selected{% endif %}>Satpura</option>
+                    <option value="Rajgir" {% if request.args.get('classroom') == 'Rajgir' %}selected{% endif %}>Rajgir</option>
+                    <option value="Tutorial Hall" {% if request.args.get('classroom') == 'Tutorial Hall' %}selected{% endif %}>Tutorial Hall</option>
+                    <option value="Narmada" {% if request.args.get('classroom') == 'Narmada' %}selected{% endif %}>Narmada</option>
+                    <option value="Godavari" {% if request.args.get('classroom') == 'Godavari' %}selected{% endif %}>Godavari</option>
+                    <option value="Ramanujam" {% if request.args.get('classroom') == 'Ramanujam' %}selected{% endif %}>Ramanujam</option>
+                    <option value="Periyar" {% if request.args.get('classroom') == 'Periyar' %}selected{% endif %}>Periyar</option>
+                    <option value="Sone" {% if request.args.get('classroom') == 'Sone' %}selected{% endif %}>Sone</option>
+                    <option value="Falgu" {% if request.args.get('classroom') == 'Falgu' %}selected{% endif %}>Falgu</option>
+                    <option value="Nilgiri 1" {% if request.args.get('classroom') == 'Nilgiri 1' %}selected{% endif %}>Nilgiri 1</option>
+                    <option value="Nilgiri 2" {% if request.args.get('classroom') == 'Nilgiri 2' %}selected{% endif %}>Nilgiri 2</option>
+                    <option value="Aravali 1" {% if request.args.get('classroom') == 'Aravali 1' %}selected{% endif %}>Aravali 1</option>
+                    <option value="Aravali 2" {% if request.args.get('classroom') == 'Aravali 2' %}selected{% endif %}>Aravali 2</option>
+                    <option value="Amarkantak 1" {% if request.args.get('classroom') == 'Amarkantak 1' %}selected{% endif %}>Amarkantak 1</option>
+                    <option value="Amarkantak 2" {% if request.args.get('classroom') == 'Amarkantak 2' %}selected{% endif %}>Amarkantak 2</option>                  
+            </select>
+            <label for="date">Filter by Date:</label>
+            <input type="date" name="date" id="date" value="{{ request.args.get('date', '') }}" class="form-control mr-2">
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+        </form>
+
+        <table class="table table-bordered table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Classroom</th>
+                    <th>Timestamp</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                    <td>
+                        {% if record[5] %}
+                            <img src="{{ url_for('static', filename='image.jpg') }}" alt="Image"> 
+                            alt="Attendance Image" 
+                            class="attendance-image" 
+                            onclick="showModal('{{ url_for('static', filename=record[5]) }}')" 
+                            onerror="this.src='{{ url_for('static', filename='no_image.png') }}'"> 
+                         {% else %}
+                            <span class="no-image">No Image</span> 
+                         {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div id="imageModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Attendance Image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showModal(src) {
+            $('#modalImage').attr('src', src);
+            $('#imageModal').modal('show');
+        }
+    </script>
+</body>
+</html>
